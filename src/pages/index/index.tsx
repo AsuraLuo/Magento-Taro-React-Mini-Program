@@ -1,4 +1,4 @@
-import { View, Navigator, Text, ViewProps } from "@tarojs/components";
+import { View, Navigator, ViewProps } from "@tarojs/components";
 import { AtButton } from "taro-ui";
 import { styled } from "@linaria/react";
 import { navigateTo } from "@tarojs/taro";

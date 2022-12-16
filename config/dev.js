@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     NODE_ENV: '"development"',
+    REACT_APP_REDUX_LOGGER: true,
   },
   defineConstants: {},
   mini: {},
