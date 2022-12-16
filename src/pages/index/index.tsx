@@ -1,32 +1,37 @@
-import { Component, PropsWithChildren } from 'react'
-import { View, Text } from '@tarojs/components'
-import { AtButton } from 'taro-ui'
+import { View, Navigator, Text, ViewProps } from "@tarojs/components";
+import { AtButton } from "taro-ui";
+import { styled } from "@linaria/react";
+import { navigateTo } from "@tarojs/taro";
 
-import "taro-ui/dist/style/components/button.scss" // 按需引入
-import './index.scss'
+import "taro-ui/dist/style/components/button.scss"; // 按需引入
 
-export default class Index extends Component<PropsWithChildren> {
+declare type Component<TProps> =
+  | ((props: TProps) => any)
+  | {
+      new (props: TProps): any;
+    };
 
-  componentWillMount () { }
+type VPS = ViewProps & { style?: React.CSSProperties };
+type TP = VPS & { color: string };
+const Title = styled<TP, VPS, Component<TP>>(View)`
+  color: ${(props) => props.color};
+  background-color: royalblue;
+`;
 
-  componentDidMount () { }
+const Index = () => {
+  const handleRedirect = () => {
+    navigateTo({ url: "/pages/cart/index" });
+  };
 
-  componentWillUnmount () { }
+  return (
+    <View className="index">
+      <Title color="red">123</Title>
+      <AtButton type="secondary" onClick={handleRedirect}>
+        Cart
+      </AtButton>
+      <Navigator url="/pages/cart/index">跳转到新页面</Navigator>
+    </View>
+  );
+};
 
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  render () {
-    return (
-      <View className='index'>
-        <Text>Hello world!</Text>
-        <AtButton type='primary'>I need Taro UI</AtButton>
-        <Text>Taro UI 支持 Vue 了吗？</Text>
-        <AtButton type='primary' circle={true}>支持</AtButton>
-        <Text>共建？</Text>
-        <AtButton type='secondary' circle={true}>来</AtButton>
-      </View>
-    )
-  }
-}
+export default Index;
