@@ -10,6 +10,15 @@ module.exports = {
       port: 3000,
       host: "localhost",
       https: false,
+      proxy: {
+        "/graphql": {
+          target: `http://82.157.172.168`,
+          changeOrigin: true,
+          pathRewrite: {
+            "^/graphql": "graphql",
+          },
+        },
+      },
     },
     esnextModules: ["taro-ui"],
   },

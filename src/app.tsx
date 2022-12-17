@@ -1,20 +1,19 @@
-import { Component, PropsWithChildren } from "react";
+import { ApolloProvider } from "@apollo/client";
 import { Provider } from "react-redux";
 
-import { createStore } from "./store";
+import { useApp } from "./hooks/App";
+import AppShell from "./components/AppShell";
 
-const store = createStore();
+const App = ({ children }) => {
+  const { client, store } = useApp();
 
-class App extends Component<PropsWithChildren> {
-  componentDidMount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
-
-  render() {
-    return <Provider store={store}>{this.props.children}</Provider>;
-  }
-}
+  return (
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <AppShell>{children}</AppShell>
+      </Provider>
+    </ApolloProvider>
+  );
+};
 
 export default App;
